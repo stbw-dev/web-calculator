@@ -1,16 +1,6 @@
 let outputText = "";
 let test = "";
 let example = [];
-let foobar = "14+5*6/7-2";
-// let barfoo = "5*4+5";
-let barfoo = "10+26+33-56*34/23"
-
-// let bar = parseInfixToPostfix(foobar);
-// let calculation = calculatePostfix(bar);
-
-// console.log(calculatePostfix(parseInfixToPostfix(barfoo)));
-
-// console.log(calculation);
 
 const buttons = document.querySelectorAll('button');
 
@@ -41,9 +31,7 @@ function handleClick(element) {
         if(isNaN(element.innerText) && isNaN(test[test.length - 1])) {
             console.log(`cannot append ${element.innerText} to operator ${test[test.length - 1]}`);
         } else if (element.innerText === '=') {
-            let postfix = parseInfixToPostfix(test);
-            let calc = calculatePostfix(postfix);
-            console.log(calc);
+            let calc = calculateEquation(test);
             test += element.innerText;
             test += calc.toString();
         } 
@@ -117,15 +105,12 @@ function parseInfixToPostfix(string) {
     return arr_output;
 }
 
-function calculatePostfix(array) {
+function calculateEquation(string) {
+    let array = parseInfixToPostfix(string)
     let stack = [];
-    let sum = 0;
-    let length = array.length;
-    console.log(`length: ${length}`);
 
     while(array.length > 0) {
         if (!isNaN(array[0])) {
-            console.log(`popping ${array[0]}!`);
             stack.push(array.shift());
         } else {
             let value = 0;
@@ -133,39 +118,24 @@ function calculatePostfix(array) {
             let right_opp = stack.pop();
             let left_opp = stack.pop();
             if (token == '+') {
-                console.log("adding!")
                 value = (+left_opp + +right_opp);
-                sum = value;
             }
 
             if (token == '-') {
-                console.log("subtracting!")
                 value = (+left_opp - +right_opp);
-                sum = value;
             }
 
             if (token == '*') {
-                console.log("multiplying!")
                 value = (+left_opp * +right_opp);
-                sum = value;
             }
 
             if (token == '/') {
-                console.log("dividing!")
                 value = (+left_opp / +right_opp);
-                sum = value;
             }
-            console.log(`value: ${value}`);
-            console.log(`running sum: ${sum}`);
 
             stack.push(value.toString())
         }
     }
 
-    console.log(`total sum: ${sum}`);
-    return sum;
-}
-
-function checkIfNum(value) {
-    return !isNaN(Number(value));
+    return stack.shift();
 }
