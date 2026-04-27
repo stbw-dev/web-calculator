@@ -1,0 +1,32 @@
+.calc-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+    width: 400px;
+    height: 400px;
+}
+
+.calc-container div {
+    display: flex;
+    width: 350px;
+    height: 55px;
+
+}
+
+.row-1, .row-2, .row-3, .row-4, .row-5 {
+    justify-content: space-evenly;
+    padding: 5px;
+}
+
+button {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.calc-output {
+    border: 1px solid black;
+    width: 350px;
+    height: 55px;
+}
