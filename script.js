@@ -10,33 +10,24 @@ buttons.forEach(button => {
     });
 });
 
-// TODO: need to handle equals inputs when there is only an operand
-// for example it is doing: 6 = 6
-// should ignore instead
-
 function handleClick(element) {
-    // console.log("You clicked:", element.innerText);
-    // Need to check if Array is empty, you can't have an arithmitic operator
-    // without a preceding number
     let p = document.querySelector(".display");
     let isCalculated = false;
     let isInvalid = false;
 
+    // Need to check if Array is empty, you can't have an arithmitic operator
+    // without a preceding number
     if (test.length === 0) {
         // need to check if innerText is a valid integer
         // if true = append to array
         // else = ignore
         if (!isNaN(element.innerText)) {
-            // console.log(`${element.innerText} is a number!`);
             test += element.innerText;
         } else {
-            // console.log(`${element.innerText} is not a number!`);
-            // p.innerText = "0";
             isInvalid = true;
         }
     } else {
         if(isNaN(element.innerText) && isNaN(test[test.length - 1])) {
-            // console.log(`cannot append ${element.innerText} to operator ${test[test.length - 1]}`);
             p.innerText = "0";
         } else if (element.innerText === '=') {
             if (isNaN(test)) {
@@ -51,10 +42,7 @@ function handleClick(element) {
         }
     }
 
-    // array is not empty
-    // do stuff
-
-    // testing, delete later
+    // clear
     if (element.innerText === 'C') {
         test = "";
         p.innerText = "0";
